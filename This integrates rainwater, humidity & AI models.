@@ -1,0 +1,27 @@
+from rainwater import calculate_rainwater_collection
+from humidity import calculate_humidity_harvesting
+from ai_water_opt import predict_water
+
+def main():
+    print("\n🌱 Sustainable Irrigation System 🌱")
+    
+    # Rainwater Harvesting
+    rainfall = float(input("\nEnter Rainfall (mm): "))
+    area = float(input("Enter Catchment Area (m²): "))
+    rainwater = calculate_rainwater_collection(rainfall, area)
+    print(f"Collected Rainwater: {rainwater} liters")
+    
+    # Atmospheric Moisture Harvesting
+    humidity = float(input("\nEnter Humidity (%): "))
+    air_volume = float(input("Enter Air Volume Processed (m³): "))
+    humidity_water = calculate_humidity_harvesting(humidity, air_volume)
+    print(f"Collected Atmospheric Water: {humidity_water} liters")
+
+    # AI-based Water Requirement Prediction
+    temp = float(input("\nEnter Temperature (°C): "))
+    soil_moisture = float(input("Enter Soil Moisture (%): "))
+    required_water = predict_water(temp, humidity, soil_moisture)
+    print(f"💧 Predicted Water Requirement: {required_water} liters/day")
+
+if __name__ == "__main__":
+    main()
