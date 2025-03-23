@@ -1,0 +1,15 @@
+def calculate_rainwater_collection(rainfall_mm, area_m2, efficiency=0.85):
+    """
+    Calculate rainwater collection.
+    :param rainfall_mm: Rainfall in mm
+    :param area_m2: Catchment area in square meters
+    :param efficiency: Collection efficiency (default 85%)
+    :return: Collected water in liters
+    """
+    volume_collected = rainfall_mm * area_m2 * efficiency  # 1mm rain = 1L/m²
+    return round(volume_collected, 2)
+
+if __name__ == "__main__":
+    rainfall = float(input("Enter rainfall in mm: "))
+    area = float(input("Enter catchment area in m²: "))
+    print(f"Collected Rainwater: {calculate_rainwater_collection(rainfall, area)} liters")
