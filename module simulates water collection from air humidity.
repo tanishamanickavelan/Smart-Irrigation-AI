@@ -1,0 +1,16 @@
+def calculate_humidity_harvesting(humidity, air_volume, efficiency=0.4):
+    """
+    Estimate water collected from atmospheric humidity.
+    :param humidity: Humidity percentage (0-100)
+    :param air_volume: Volume of air processed in cubic meters
+    :param efficiency: Conversion efficiency (default 40%)
+    :return: Water collected in liters
+    """
+    max_water_content = air_volume * (humidity / 100) * 0.015  # 1m³ air ≈ 15g max water
+    collected_water = max_water_content * efficiency
+    return round(collected_water, 2)
+
+if __name__ == "__main__":
+    humidity = float(input("Enter humidity (%): "))
+    air_volume = float(input("Enter air volume processed (m³): "))
+    print(f"Collected Water: {calculate_humidity_harvesting(humidity, air_volume)} liters")
