@@ -1,0 +1,36 @@
+import pandas as pd
+import joblib
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+# Load dataset
+def load_data():
+    df = pd.read_csv("data/weather_data.csv")
+    return df
+
+# Train AI Model
+def train_model():
+    df = load_data()
+    X = df[['temperature', 'humidity', 'soil_moisture']]
+    y = df['water_required']
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+
+    joblib.dump(model, "models/water_model.pkl")
+    print("AI Model Trained and Saved!")
+
+# Predict Water Requirement
+def predict_water(temperature, humidity, soil_moisture):
+    model = joblib.load("models/water_model.pkl")
+    prediction = model.predict([[temperature, humidity, soil_moisture]])
+    return round(prediction[0], 2)
+
+if __name__ == "__main__":
+    train_model()
+    temp = float(input("Enter temperature (°C): "))
+    hum = float(input("Enter humidity (%): "))
+    soil = float(input("Enter soil moisture (%): "))
+    print(f"Predicted Water Requirement: {predict_water(temp, hum, soil)} liters")
